@@ -1,0 +1,1319 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Self-Learning AI Agent</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+    <style>
+
+        body {
+            background-color: #f4f6f9;
+        }
+
+        .header {
+            background: #212529;
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+        }
+
+        .card {
+            margin-bottom: 20px;
+        }
+
+        .knowledge-item {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            background: white;
+        }
+
+        .response-box {
+            background: #eef7ff;
+            border-left: 5px solid #0d6efd;
+            padding: 20px;
+            border-radius: 8px;
+            white-space: pre-wrap;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .search-box {
+            margin-bottom: 15px;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="container py-4">
+
+
+    <!-- ================================================= -->
+    <!-- HEADER -->
+    <!-- ================================================= -->
+
+    <div class="header text-center">
+
+        <h1>🤖 Self-Learning AI Agent</h1>
+
+        <p class="mb-0">
+            Ask questions, teach knowledge and learn from feedback
+        </p>
+
+    </div>
+
+
+    <!-- ================================================= -->
+    <!-- ASK AI -->
+    <!-- ================================================= -->
+
+    <div class="card shadow-sm">
+
+        <div class="card-header bg-primary text-white">
+
+            <h4 class="mb-0">💬 Ask AI</h4>
+
+        </div>
+
+        <div class="card-body">
+
+            <form method="POST">
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Ask your question
+                    </label>
+
+                    <textarea
+                        name="message"
+                        class="form-control"
+                        rows="3"
+                        placeholder="Example: What is Python?"
+                        required></textarea>
+
+                </div>
+
+                <button
+                    type="submit"
+                    class="btn btn-primary">
+
+                    Ask AI
+
+                </button>
+
+            </form>
+
+
+            {% if response %}
+
+            <hr>
+
+            <h5>AI Response</h5>
+
+            <div class="response-box">
+
+                {{ response }}
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+
+    <!-- ================================================= -->
+    <!-- TEACH AI -->
+    <!-- ================================================= -->
+
+    <div class="card shadow-sm">
+
+        <div class="card-header bg-success text-white">
+
+            <h4 class="mb-0">🧠 Teach AI</h4>
+
+        </div>
+
+        <div class="card-body">
+
+            <form
+                method="POST"
+                action="/teach">
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Topic
+                    </label>
+
+                    <input
+                        type="text"
+                        name="topic"
+                        class="form-control"
+                        placeholder="Example: Arduino"
+                        required>
+
+                </div>
+
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Information
+                    </label>
+
+                    <textarea
+                        name="information"
+                        class="form-control"
+                        rows="4"
+                        placeholder="Enter information about the topic..."
+                        required></textarea>
+
+                </div>
+
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Category
+                    </label>
+
+                    <select
+                        name="category"
+                        class="form-select">
+
+                        <option value="General">
+                            General
+                        </option>
+
+                        <option value="Electronics">
+                            Electronics
+                        </option>
+
+                        <option value="Programming">
+                            Programming
+                        </option>
+
+                        <option value="AI/ML">
+                            AI/ML
+                        </option>
+
+                        <option value="IoT">
+                            IoT
+                        </option>
+
+                        <option value="Hardware">
+                            Hardware
+                        </option>
+
+                        <option value="Software">
+                            Software
+                        </option>
+
+                        <option value="Other">
+                            Other
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="btn btn-success">
+
+                    Teach AI
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Self-Learning AI Agent</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+    <style>
+
+        body {
+            background-color: #f4f6f9;
+        }
+
+        .header {
+            background: #212529;
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+        }
+
+        .card {
+            margin-bottom: 20px;
+        }
+
+        .knowledge-item {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            background: white;
+        }
+
+        .response-box {
+            background: #eef7ff;
+            border-left: 5px solid #0d6efd;
+            padding: 20px;
+            border-radius: 8px;
+            white-space: pre-wrap;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .search-box {
+            margin-bottom: 15px;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="container py-4">
+
+
+    <!-- ================================================= -->
+    <!-- HEADER -->
+    <!-- ================================================= -->
+
+    <div class="header text-center">
+
+        <h1>🤖 Self-Learning AI Agent</h1>
+
+        <p class="mb-0">
+            Ask questions, teach knowledge and learn from feedback
+        </p>
+
+    </div>
+
+
+    <!-- ================================================= -->
+    <!-- ASK AI -->
+    <!-- ================================================= -->
+
+    <div class="card shadow-sm">
+
+        <div class="card-header bg-primary text-white">
+
+            <h4 class="mb-0">💬 Ask AI</h4>
+
+        </div>
+
+        <div class="card-body">
+
+            <form method="POST">
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Ask your question
+                    </label>
+
+                    <textarea
+                        name="message"
+                        class="form-control"
+                        rows="3"
+                        placeholder="Example: What is Python?"
+                        required></textarea>
+
+                </div>
+
+                <button
+                    type="submit"
+                    class="btn btn-primary">
+
+                    Ask AI
+
+                </button>
+
+            </form>
+
+
+            {% if response %}
+
+            <hr>
+
+            <h5>AI Response</h5>
+
+            <div class="response-box">
+
+                {{ response }}
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+<!-- ================================================= -->
+    <!-- ANALYTICS DASHBOARD -->
+    <!-- ================================================= -->
+
+    <div class="card shadow-sm">
+
+        <div class="card-header bg-dark text-white">
+
+            <h4 class="mb-0">
+                📊 Analytics Dashboard
+            </h4>
+
+        </div>
+
+        <div class="card-body">
+
+            <div class="row">
+
+                <div class="col-md-3">
+
+                    <div class="card stat-card shadow-sm">
+
+                        <h6>Total Conversations</h6>
+
+                        <h2>{{ total }}</h2>
+
+                    </div>
+
+                </div>
+
+
+                <div class="col-md-3">
+
+                    <div class="card stat-card shadow-sm">
+
+                        <h6>Helpful</h6>
+
+                        <h2 class="text-success">
+                            {{ helpful }}
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+                <div class="col-md-3">
+
+                    <div class="card stat-card shadow-sm">
+
+                        <h6>Not Helpful</h6>
+
+                        <h2 class="text-danger">
+                            {{ not_helpful }}
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+                <div class="col-md-3">
+
+                    <div class="card stat-card shadow-sm">
+
+                        <h6>Learned Knowledge</h6>
+
+                        <h2 class="text-primary">
+                            {{ knowledge_count }}
+                        </h2>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="row mt-3">
+
+                <div class="col-md-12">
+
+                    <div class="card stat-card shadow-sm">
+
+                        <h6>Learning Activities</h6>
+
+                        <h2 class="text-info">
+                            {{ learning_count }}
+                        </h2>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ================================================= -->
+<!-- ANALYTICS CHART -->
+<!-- ================================================= -->
+
+<div class="card shadow-sm mt-3">
+
+    <div class="card-header bg-info text-white">
+
+        <h4 class="mb-0">
+            📊 Project Analytics Chart
+        </h4>
+
+    </div>
+
+    <div class="card-body">
+
+        <canvas id="analyticsChart"></canvas>
+
+    </div>
+
+</div>
+
+    <!-- ================================================= -->
+<!-- EXPORT KNOWLEDGE -->
+<!-- ================================================= -->
+
+<div class="text-center mt-3 mb-3">
+
+    <a
+        href="/export_knowledge"
+        class="btn btn-primary">
+
+        📥 Export Knowledge Base
+
+    </a>
+
+</div>
+
+
+    <!-- ================================================= -->
+    <!-- KNOWLEDGE CATEGORY COUNTS -->
+    <!-- ================================================= -->
+
+    <div class="card shadow-sm">
+
+        <div class="card-header bg-info text-white">
+
+            <h4 class="mb-0">
+                📚 Knowledge by Category
+            </h4>
+
+        </div>
+
+        <div class="card-body">
+
+            <div class="row">
+
+                {% for category, count in category_counts %}
+
+                <div class="col-md-3 mb-3">
+
+                    <div class="card stat-card shadow-sm">
+
+                        <h6>{{ category }}</h6>
+
+                        <h3>
+                            {{ count }}
+                        </h3>
+
+                    </div>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    
+<!-- ================================================= -->
+    <!-- KNOWLEDGE BASE -->
+    <!-- ================================================= -->
+
+    <div class="card shadow-sm">
+
+        <div class="card-header bg-warning">
+
+            <h4 class="mb-0">
+                📚 Knowledge Base
+            </h4>
+
+        </div>
+
+        <div class="card-body">
+
+            <!-- SEARCH -->
+
+            <div class="row search-box">
+
+                <div class="col-md-8">
+
+                    <input
+                        type="text"
+                        id="knowledgeSearch"
+                        class="form-control"
+                        placeholder="🔍 Search knowledge..."
+                        onkeyup="applyKnowledgeFilter()">
+
+                </div>
+
+                <div class="col-md-3">
+
+                    <select
+                        id="categoryFilter"
+                        class="form-select"
+                        onchange="applyKnowledgeFilter()">
+
+                        <option value="all">
+                            All Categories
+                        </option>
+
+                        <option value="general">
+                            General
+                        </option>
+
+                        <option value="electronics">
+                            Electronics
+                        </option>
+
+                        <option value="programming">
+                            Programming
+                        </option>
+
+                        <option value="ai/ml">
+                            AI/ML
+                        </option>
+
+                        <option value="iot">
+                            IoT
+                        </option>
+
+                        <option value="hardware">
+                            Hardware
+                        </option>
+
+                        <option value="software">
+                            Software
+                        </option>
+
+                        <option value="other">
+                            Other
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <div class="col-md-1">
+
+                    <button
+                        type="button"
+                        class="btn btn-secondary"
+                        onclick="clearKnowledgeSearch()">
+
+                        Clear
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- KNOWLEDGE ITEMS -->
+
+            <div id="knowledgeList">
+
+                {% for item in knowledge_list %}
+
+                <div
+                    class="knowledge-item"
+                    data-topic="{{ item[1]|lower }}"
+                    data-information="{{ item[2]|lower }}"
+                    data-category="{{ item[3]|lower }}">
+
+                    <h5>
+                        {{ item[1] }}
+                    </h5>
+
+                    <p>
+                        {{ item[2] }}
+                    </p>
+
+                    <span class="badge bg-primary">
+                        {{ item[3] }}
+                    </span>
+
+
+                    <!-- UPDATE -->
+
+                    <form
+                        method="POST"
+                        action="/update_knowledge/{{ item[0] }}"
+                        class="mt-3">
+
+                        <input
+                            type="text"
+                            name="topic"
+                            value="{{ item[1] }}"
+                            class="form-control mb-2"
+                            required>
+
+                        <textarea
+                            name="information"
+                            class="form-control mb-2"
+                            rows="3"
+                            required>{{ item[2] }}</textarea>
+
+                        <select
+                            name="category"
+                            class="form-select mb-2">
+
+                            <option value="General"
+                                {% if item[3] == "General" %}
+                                selected
+                                {% endif %}>
+                                General
+                            </option>
+
+                            <option value="Electronics"
+                                {% if item[3] == "Electronics" %}
+                                selected
+                                {% endif %}>
+                                Electronics
+                            </option>
+
+                            <option value="Programming"
+                                {% if item[3] == "Programming" %}
+                                selected
+                                {% endif %}>
+                                Programming
+                            </option>
+
+                            <option value="AI/ML"
+                                {% if item[3] == "AI/ML" %}
+                                selected
+                                {% endif %}>
+                                AI/ML
+                            </option>
+
+                            <option value="IoT"
+                                {% if item[3] == "IoT" %}
+                                selected
+                                {% endif %}>
+                                IoT
+                            </option>
+
+                            <option value="Hardware"
+                                {% if item[3] == "Hardware" %}
+                                selected
+                                {% endif %}>
+                                Hardware
+                            </option>
+
+                            <option value="Software"
+                                {% if item[3] == "Software" %}
+                                selected
+                                {% endif %}>
+                                Software
+                            </option>
+
+                            <option value="Other"
+                                {% if item[3] == "Other" %}
+                                selected
+                                {% endif %}>
+                                Other
+                            </option>
+
+                        </select>
+
+                        <button
+                            type="submit"
+                            class="btn btn-warning btn-sm">
+
+                            Update
+
+                        </button>
+
+                    </form>
+
+
+                    <!-- DELETE -->
+
+                    <form
+                        method="POST"
+                        action="/delete_knowledge/{{ item[0] }}"
+                        class="d-inline">
+
+                        <button
+                            type="submit"
+                            class="btn btn-danger btn-sm mt-2">
+
+                            Delete
+
+                        </button>
+
+                    </form>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+
+            <div
+                id="noKnowledgeFound"
+                class="alert alert-secondary"
+                style="display:none;">
+
+                No matching knowledge found.
+
+            </div>
+
+        </div>
+
+    </div
+
+     <!-- ================================================= -->
+    <!-- LEARNING LOG -->
+    <!-- ================================================= -->
+
+    <div class="card shadow-sm">
+
+        <div class="card-header bg-info text-white">
+
+            <h4 class="mb-0">
+                🧠 Learning Log
+            </h4>
+
+        </div>
+
+        <div class="card-body">
+
+            {% if learning_logs %}
+
+            <div class="table-responsive">
+
+                <table class="table table-bordered">
+
+                    <thead>
+
+                        <tr>
+                            <th>Topic</th>
+                            <th>Source</th>
+                            <th>Learned At</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        {% for log in learning_logs %}
+
+                        <tr>
+
+                            <td>{{ log[1] }}</td>
+
+                            <td>{{ log[2] }}</td>
+
+                            <td>{{ log[3] }}</td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            {% else %}
+
+            <p class="text-muted">
+                No learning activity yet.
+            </p>
+
+            {% endif %}
+
+
+            <form
+                method="POST"
+                action="/clear_learning">
+
+                <button
+                    type="submit"
+                    class="btn btn-danger">
+
+                    Clear Learning Log
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================================================= -->
+    <!-- CONVERSATION MEMORY -->
+    <!-- ================================================= -->
+
+    <div class="card shadow-sm">
+
+        <div class="card-header bg-secondary text-white">
+
+            <h4 class="mb-0">
+                💾 Conversation Memory
+            </h4>
+
+        </div>
+
+        <div class="card-body">
+
+            {% if conversations %}
+
+            {% for conversation in conversations %}
+
+            <div class="knowledge-item">
+
+                <p>
+                    <strong>You:</strong>
+                    {{ conversation[1] }}
+                </p>
+
+                <p>
+                    <strong>AI:</strong>
+                    {{ conversation[2] }}
+                </p>
+
+
+                <!-- FEEDBACK -->
+
+                <div class="mt-2">
+
+                    <form
+                        method="POST"
+                        action="/feedback"
+                        class="d-inline">
+
+                        <input
+                            type="hidden"
+                            name="conversation_id"
+                            value="{{ conversation[0] }}">
+
+                        <input
+                            type="hidden"
+                            name="feedback"
+                            value="1">
+
+                        <button
+                            type="submit"
+                            class="btn btn-success btn-sm">
+
+                            👍 Helpful
+
+                        </button>
+
+                    </form>
+
+
+                    <form
+                        method="POST"
+                        action="/feedback"
+                        class="d-inline">
+
+                        <input
+                            type="hidden"
+                            name="conversation_id"
+                            value="{{ conversation[0] }}">
+
+                        <input
+                            type="hidden"
+                            name="feedback"
+                            value="-1">
+
+                        <button
+                            type="submit"
+                            class="btn btn-danger btn-sm">
+
+                            👎 Not Helpful
+
+                        </button>
+
+                    </form>
+
+                </div>
+
+                {% if conversation[3] %}
+
+                <small class="text-muted">
+
+                    Feedback:
+                    {% if conversation[3] == "1" %}
+                        Helpful 👍
+                    {% elif conversation[3] == "-1" %}
+                        Not Helpful 👎
+                    {% endif %}
+
+                </small>
+
+                {% endif %}
+
+            </div>
+
+            {% endfor %}
+
+            {% else %}
+
+            <p class="text-muted">
+                No conversations yet.
+            </p>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+ 
+            
+            
+            d
+
+            const selectedCategory =
+                categorySelect.value.toLowerCase();
+
+
+            const items =
+                document.querySelectorAll
+                    ".knowledge-item"
+                );
+
+            let visibleCount = 0;
+
+
+            items.forEach(function(item) {
+
+                const topic =
+                    item.getAttribute(
+                        "data-topic"
+                    ) || "";
+
+                const information =
+                    item.getAttribute(
+                        "data-information"
+                    ) || "";
+
+                const category =
+                    item.getAttribute(
+                        "data-category"
+                    ) || "";
+
+
+                const matchesSearch =
+                    topic.includes(searchText) ||
+                    information.includes(searchText);
+
+
+                const matchesCategory =
+                    selectedCategory === "all" ||
+                    category === selectedCategory;
+
+
+                if (
+                    matchesSearch &&
+                    matchesCategory
+                ) {
+
+                    item.style.display = "block";
+
+                    visibleCount++;
+
+                } else {
+
+                    item.style.display = "none";
+
+                }
+
+            });
+
+
+            const noResult =
+                document.getElementById(
+                    "noKnowledgeFound"
+                );
+
+
+            if (noResult) {
+
+                if (visibleCount === 0) {
+
+                    noResult.style.display = "block";
+
+                } else {
+
+                    noResult.style.display = "none";
+
+                }
+
+            }
+
+        }
+        
+<!-- ================================================= -->
+    <!-- KNOWLEDGE SEARCH & CATEGORY FILTER -->
+    <!-- ================================================= -->
+
+    <script>
+
+        function applyKnowledgeFilter() {
+
+            const searchInput =
+                document.getElementById(
+                    "knowledgeSearch"
+                );
+
+            const categorySelect =
+                document.getElementById(
+                    "categoryFilter"
+                );
+
+            const searchText =
+                searchInput.value
+                    .toLowerCase()
+                    .trim();
+
+            const selectedCategory =
+                categorySelect.value.toLowerCase();
+
+
+            const items =
+                document.querySelectorAll(
+                    ".knowledge-item"
+                );
+
+            let visibleCount = 0;
+
+
+            items.forEach(function(item) {
+
+                const topic =
+                    item.getAttribute(
+                        "data-topic"
+                    ) || "";
+
+                const information =
+                    item.getAttribute(
+                        "data-information"
+                    ) || "";
+
+                const category =
+                    item.getAttribute(
+                        "data-category"
+                    ) || "";
+
+
+                const matchesSearch =
+                    topic.includes(searchText) ||
+                    information.includes(searchText);
+
+
+                const matchesCategory =
+                    selectedCategory === "all" ||
+                    category === selectedCategory;
+
+
+                if (
+                    matchesSearch &&
+                    matchesCategory
+                ) {
+
+                    item.style.display = "block";
+
+                    visibleCount++;
+
+                } else {
+
+                    item.style.display = "none";
+
+                }
+
+            });
+
+
+            const noResult =
+                document.getElementById(
+                    "noKnowledgeFound"
+                );
+
+
+            if (noResult) {
+
+                if (visibleCount === 0) {
+
+                    noResult.style.display = "block";
+
+                } else {
+
+                    noResult.style.display = "none";
+
+                }
+
+            }
+
+        }
+
+        // =====================================================
+// ANALYTICS CHART
+// =====================================================
+
+fetch("/analytics_data")
+    .then(function(response) {
+        return response.json();
+    })
+    .then(function(data) {
+
+        const chart =
+            document.getElementById(
+                "analyticsChart"
+            );
+
+        if (chart) {
+
+            new Chart(
+                chart,
+                {
+                    type: "bar",
+
+                    data: {
+                        labels: [
+                            "Conversations",
+                            "Helpful",
+                            "Not Helpful",
+                            "Knowledge",
+                            "Learning"
+                        ],
+
+                        datasets: [
+                            {
+                                label: "Project Statistics",
+
+                                data: [
+                                    data.total,
+                                    data.helpful,
+                                    data.not_helpful,
+                                    data.knowledge,
+                                    data.learning
+                                ]
+                            }
+                        ]
+                    },
+
+                    options: {
+                        responsive: true,
+
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                }
+            );
+
+        }
+
+    });
+
+
+        // =================================================
+        // CLEAR SEARCH
+        // =================================================
+
+        function clearKnowledgeSearch() {
+
+            document.getElementById(
+                "knowledgeSearch"
+            ).value = "";
+
+
+            document.getElementById(
+                "categoryFilter"
+            ).value = "all";
+
+
+            applyKnowledgeFilter();
+
+        }
+
+    </script>
+
+
+</div>
+
+</body>
+
+</html>
+
+
+   
